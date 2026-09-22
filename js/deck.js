@@ -1,19 +1,21 @@
 import { Card } from "./card";
 
 export class Deck {
+    #cards;
+
     constructor() {
-        this.cards = [];
+        this.#cards = [];
 
         for(let rank = 1; rank <= 13; rank++) {
-            this.cards.push(new Card("spades", rank));
-            this.cards.push(new Card("hearts", rank));
-            this.cards.push(new Card("diamonds", rank));
-            this.cards.push(new Card("clubs", rank));
+            this.#cards.push(new Card("spades", rank));
+            this.#cards.push(new Card("hearts", rank));
+            this.#cards.push(new Card("diamonds", rank));
+            this.#cards.push(new Card("clubs", rank));
         }
     }
 
     shuffle() {
-        let currentIndex = this.cards.length;
+        let currentIndex = this.#cards.length;
 
         // While there remain elements to shuffle...
         while (currentIndex !== 0) {
@@ -23,12 +25,12 @@ export class Deck {
             currentIndex--;
 
             // And swap it with the current element.
-            [this.cards[currentIndex], this.cards[randomIndex]] = [
-                this.cards[randomIndex], this.cards[currentIndex]];
+            [this.#cards[currentIndex], this.#cards[randomIndex]] = [
+                this.#cards[randomIndex], this.#cards[currentIndex]];
         }
     }
 
     draw() {
-        return this.cards.pop();
+        return this.#cards.pop();
     }
 }
