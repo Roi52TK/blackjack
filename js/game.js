@@ -73,7 +73,8 @@ export class Game {
             return;
         }
 
-        this.#playerHand.addCard(this.#deck.draw());
+        const card = this.#deck.draw();
+        this.#playerHand.addCard(card);
 
         if(this.#playerHand.isBust()) {
             this.#playerLost();
@@ -81,6 +82,8 @@ export class Game {
         else if (this.#playerHand.getValue() === 21) {
             this.#gameState = GAME_STATE.DEALER_TURN;
         }
+
+        return card;
     }
 
     stand() {
@@ -95,11 +98,12 @@ export class Game {
         }
 
         if (this.#dealerHand.getValue() < 17) {
-            this.#dealerHand.addCard(this.#deck.draw());
+            const card = this.#deck.draw();
+            this.#dealerHand.addCard(card);
+            return card;
         }
-        else {
-            this.#compareHands();
-        }
+
+        this.#compareHands();
     }
 
     #compareHands() {
