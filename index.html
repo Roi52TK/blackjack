@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Blackjack</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="js/main.js" defer></script>
 </head>
-    
+
 <body>
-    
+
+    <main>
+        <h1>Blackjack</h1>
+
+        <section id="dealer">
+            <h2>Dealer</h2>
+
+            <div id="dealer-cards"></div>
+
+            <p>Value: <span id="dealer-value">?</span></p>
+        </section>
+
+        <section id="player">
+            <h2>Player</h2>
+
+            <div id="player-cards"></div>
+
+            <p>Value: <span id="player-value">0</span></p>
+        </section>
+
+        <section id="game-controls">
+            <button id="hit-button">Hit</button>
+            <button id="stand-button">Stand</button>
+            <button id="new-game-button">New Game</button>
+        </section>
+
+        <p id="game-message"></p>
+    </main>
+
 </body>
 
 </html>

@@ -79,23 +79,27 @@ export class Game {
             this.#playerLost();
         }
         else if (this.#playerHand.getValue() === 21) {
-            this.#dealerTurn();
+            this.#gameState = GAME_STATE.DEALER_TURN;
         }
     }
 
     stand() {
-        this.#dealerTurn();
+        if(this.#gameState === GAME_STATE.PLAYER_TURN) {
+            this.#gameState = GAME_STATE.DEALER_TURN;
+        }
     }
 
-    #dealerTurn() {
-        this.#gameState = GAME_STATE.DEALER_TURN;
-
-        // Dealer's turn
-        while (this.#dealerHand.getValue() < 17) {
-            this.#dealerHand.addCard(this.#deck.draw());
+    playDealerTurn() {
+        if(this.#gameState !== GAME_STATE.DEALER_TURN) {
+            return;
         }
 
-        this.#compareHands();
+        if (this.#dealerHand.getValue() < 17) {
+            this.#dealerHand.addCard(this.#deck.draw());
+        }
+        else {
+            this.#compareHands();
+        }
     }
 
     #compareHands() {
