@@ -1,4 +1,5 @@
-import { Game, GAME_STATE } from "./game";
+import { Game } from "./game";
+import { GAME_STATE } from "./constants";
 
 export class Controller {
     #game;

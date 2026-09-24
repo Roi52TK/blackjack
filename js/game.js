@@ -1,19 +1,6 @@
 import { Deck } from "./deck";
 import { Hand } from "./hand";
-
-export const GAME_STATE = {
-    NOT_STARTED: 0,
-    PLAYER_TURN: 1,
-    DEALER_TURN: 2,
-    GAME_OVER: 3
-};
-
-export const GAME_RESULT = {
-    UNKNOWN: 0,
-    PLAYER_LOST: 1,
-    PLAYER_WON: 2,
-    DRAW: 3
-};
+import { GAME_STATE, GAME_RESULT } from "./constants";
 
 export class Game {
     #deck;

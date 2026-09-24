@@ -1,4 +1,5 @@
 import { Card } from "./card";
+import { CARD_SUIT } from "./constants";
 
 export class Deck {
     #cards;
@@ -7,10 +8,10 @@ export class Deck {
         this.#cards = [];
 
         for(let rank = 1; rank <= 13; rank++) {
-            this.#cards.push(new Card("spades", rank));
-            this.#cards.push(new Card("hearts", rank));
-            this.#cards.push(new Card("diamonds", rank));
-            this.#cards.push(new Card("clubs", rank));
+            this.#cards.push(new Card(CARD_SUIT.SPADES, rank));
+            this.#cards.push(new Card(CARD_SUIT.HEARTS, rank));
+            this.#cards.push(new Card(CARD_SUIT.DIAMONDS, rank));
+            this.#cards.push(new Card(CARD_SUIT.CLUBS, rank));
         }
     }
 
