@@ -13,10 +13,13 @@ export class Controller {
     async startNewGame() {
         this.#game.startNew();
 
-        await this.#ui.displayNewGame(this.#game.playerHand, this.#game.dealerHand);
+        await this.#ui.displayNewGame(
+            this.#game.playerHand, 
+            this.#game.dealerHand, 
+            this.#game.playerValue);
 
         if (this.#game.gameState === GAME_STATE.GAME_OVER) {
-            await this.#ui.revealDealerCard();
+            await this.#ui.revealDealerCard(this.#game.dealerValue);
             await this.#ui.displayGameOver(this.#game.gameResult);
         }
     }
@@ -28,7 +31,7 @@ export class Controller {
 
         const card = this.#game.hit();
 
-        await this.#ui.displayPlayerCard(card);
+        await this.#ui.displayPlayerCard(card, this.#game.playerValue);
 
         if (this.#game.gameState === GAME_STATE.DEALER_TURN) {
             await this.#playDealerTurn();
@@ -47,24 +50,16 @@ export class Controller {
     }
 
     async #playDealerTurn() {
-        await this.#ui.revealDealerCard();
+        await this.#ui.revealDealerCard(this.#game.dealerValue);
 
         while (this.#game.gameState === GAME_STATE.DEALER_TURN) {
             const card = this.#game.playDealerTurn();
 
             if (card) {
-                await this.#ui.displayDealerCard(card);
+                await this.#ui.displayDealerCard(card, this.#game.dealerValue);
             }
         }
 
         await this.#ui.displayGameOver(this.#game.gameResult);
-    }
-
-    getPlayerValue() {
-        return this.#game.playerValue;
-    }
-
-    getDealerValue() {
-        return this.#game.dealerValue;
     }
 }
