@@ -1,6 +1,6 @@
-import { Deck } from "./deck";
-import { Hand } from "./hand";
-import { GAME_STATE, GAME_RESULT } from "./constants";
+import { Deck } from "./deck.js";
+import { Hand } from "./hand.js";
+import { GAME_STATE, GAME_RESULT } from "../constants.js";
 
 export class Game {
     #deck;
@@ -138,5 +138,13 @@ export class Game {
 
     get dealerHand() {
         return this.#dealerHand.getCards();
+    }
+
+    get playerValue() {
+        return this.#playerHand.getValue();
+    }
+
+    get dealerValue() {
+        return this.#dealerHand.getValue();
     }
 }

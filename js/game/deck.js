@@ -1,5 +1,5 @@
-import { Card } from "./card";
-import { CARD_SUIT } from "./constants";
+import { Card } from "./card.js";
+import { CARD_SUIT } from "../constants.js";
 
 export class Deck {
     #cards;
