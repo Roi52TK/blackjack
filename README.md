@@ -4,6 +4,10 @@ A browser-based Blackjack game built with vanilla JavaScript, HTML, and CSS.
 
 The project was created as a learning project to practice JavaScript fundamentals, object-oriented programming, ES modules, DOM manipulation, UI design, and separation of game logic from presentation.
 
+## Play Online
+
+[**🎮 Play Blackjack**](https://roi52tk.github.io/blackjack/)
+
 ## Features
 
 * Standard Blackjack gameplay
