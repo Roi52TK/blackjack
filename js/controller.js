@@ -1,4 +1,3 @@
-import { Game } from "./game.js";
 import { GAME_STATE } from "./constants.js";
 
 export class Controller {

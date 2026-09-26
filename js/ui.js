@@ -16,7 +16,19 @@ export class UI {
         this.#gameMessage = document.getElementById("game-message");
     }
 
+    #resetDisplay() {
+        this.#clearHands();
+        this.#gameMessage.textContent = "";
+    }
+
+    #clearHands() {
+        this.#playerCards.innerHTML = "";
+        this.#dealerCards.innerHTML = "";
+    }
+
     async displayNewGame(playerHand, dealerHand, playerValue) {
+        this.#resetDisplay();
+
         const playerCard1 = this.#createCard(playerHand[0]);
         await this.#displayCard(playerCard1, this.#playerCards);
 
@@ -65,7 +77,22 @@ export class UI {
     }
 
     async displayGameOver(gameResult) {
-        
+        let message;
+        switch(gameResult) {
+            case GAME_RESULT.PLAYER_WON:
+                message = "You won!";
+                break;
+            case GAME_RESULT.PLAYER_LOST:
+                message = "You lost.";
+                break;
+            case GAME_RESULT.DRAW:
+                message = "Draw";
+                break;
+            default:
+                message = "ERROR";
+        }
+
+        this.#gameMessage.textContent = message;
     }
 
     async #displayCard(cardDOM, container) {
