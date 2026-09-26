@@ -137,6 +137,13 @@ export class UI {
         const rank = this.#getRankText(card.rank);
         const suit = this.#getSuitIcon(card.suit);
 
+        if (card.suit === CARD_SUIT.HEARTS || card.suit === CARD_SUIT.DIAMONDS) {
+            cardDiv.classList.add("red-card");
+        }
+        else {
+            cardDiv.classList.add("black-card");
+        }
+
         cardRankTop.textContent = rank;
         cardSuitTop.textContent = suit;
 

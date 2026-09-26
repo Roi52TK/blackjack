@@ -171,6 +171,14 @@ section p span {
 
 .card-corner,
 .card-center {
+    color: inherit;
+}
+
+.card.red-card {
+    color: #d22;
+}
+
+.card.black-card {
     color: #111;
 }
 
