@@ -1,17 +1,130 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at center, #17633f 0%, #0d432d 55%, #08291d 100%);
+
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    width: min(900px, 92vw);
+    min-height: 700px;
+
+    padding: 40px 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: rgba(5, 35, 24, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(8px);
+}
+
+h1 {
+    margin: 0 0 35px;
+
+    font-family: Georgia, serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+section {
+    width: 100%;
+    text-align: center;
+}
+
+section h2 {
+    margin: 0 0 16px;
+
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+#dealer {
+    margin-bottom: 35px;
+}
+
+#player {
+    margin-bottom: 35px;
+}
+
+#dealer-cards,
+#player-cards {
+    min-height: 130px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+
+    flex-wrap: wrap;
+}
+
+section p {
+    margin: 16px 0 0;
+
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+section p span {
+    display: inline-block;
+    min-width: 28px;
+
+    color: white;
+    font-weight: bold;
+}
+
 .card {
     width: 90px;
     height: 130px;
 
-    background-color: white;
-    border: 2px solid #222;
+    flex: 0 0 auto;
+
+    background: linear-gradient(145deg, #ffffff, #eeeeee);
+    border: 2px solid #d8d8d8;
     border-radius: 10px;
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.2);
 
     position: relative;
-    box-sizing: border-box;
 
     font-family: Georgia, serif;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 12px 20px rgba(0, 0, 0, 0.35),
+        0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card-corner {
@@ -61,18 +174,177 @@
     color: #111;
 }
 
+/* Hidden dealer card */
+
 .hidden-card {
     position: relative;
     overflow: hidden;
+}
+
+.hidden-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-color: #173b72;
+
+    z-index: 10;
 }
 
 .hidden-card::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: #333;
-    border: 2px solid white;
-    box-shadow: inset 0 0 0 6px #333, inset 0 0 0 8px white;
-    box-sizing: border-box;
-    z-index: 10;
+
+    background: repeating-linear-gradient(45deg,
+            transparent 0,
+            transparent 6px,
+            rgba(255, 255, 255, 0.08) 6px,
+            rgba(255, 255, 255, 0.08) 8px);
+
+    z-index: 11;
+}
+
+/* Controls */
+
+#game-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+
+    flex-wrap: wrap;
+}
+
+button {
+    min-width: 110px;
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #f4f4f4;
+    color: #17231d;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease;
+}
+
+button:hover {
+    background: white;
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
+}
+
+#new-game-button {
+    background: #d9b44a;
+    color: #211a08;
+}
+
+#new-game-button:hover {
+    background: #e7c35a;
+}
+
+/* Game result */
+
+#game-message {
+    min-height: 32px;
+
+    margin: 25px 0 0;
+
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    main {
+        width: 94vw;
+        min-height: 95vh;
+
+        padding: 30px 18px;
+
+        border-radius: 18px;
+    }
+
+    h1 {
+        margin-bottom: 28px;
+        font-size: 38px;
+    }
+
+    #dealer {
+        margin-bottom: 28px;
+    }
+
+    #player {
+        margin-bottom: 28px;
+    }
+
+    #dealer-cards,
+    #player-cards {
+        gap: 8px;
+    }
+
+    .card {
+        width: 72px;
+        height: 104px;
+        border-radius: 8px;
+    }
+
+    .card-corner.top {
+        top: 6px;
+        left: 6px;
+    }
+
+    .card-corner.bottom {
+        bottom: 6px;
+        right: 6px;
+    }
+
+    .card-rank {
+        font-size: 18px;
+    }
+
+    .card-suit {
+        font-size: 15px;
+    }
+
+    .card-center {
+        font-size: 38px;
+    }
+
+    #game-controls {
+        width: 100%;
+        gap: 10px;
+    }
+
+    button {
+        flex: 1;
+        min-width: 90px;
+        padding: 11px 12px;
+    }
+
+    #game-message {
+        font-size: 22px;
+    }
 }
