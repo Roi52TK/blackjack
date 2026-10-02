@@ -17,6 +17,8 @@ export class UI {
     }
 
     #resetDisplay() {
+        this.#playerValue.textContent = "0";
+        this.#dealerValue.textContent = "?";
         this.#clearHands();
         this.#gameMessage.textContent = "";
     }
@@ -58,14 +60,23 @@ export class UI {
 
     async revealDealerCard(dealerValue) {
         // Flip card animation
+        this.#dealerHiddenCard.classList.add("flip");
 
         // Remove "hidden-card" class from #dealerHiddenCard mid-animation
-        this.#dealerHiddenCard.classList.remove("hidden-card");
-
-        setTimeout(() => { }, 500); // Delay for testing
+        setTimeout(() => {
+            this.#dealerHiddenCard.classList.remove("hidden-card");
+        }, 400); // Depends on CSS animation duration (half of it)
 
         // Show dealer's hand value
+        await this.#waitForAnimation(this.#dealerHiddenCard);
+        this.#dealerHiddenCard.classList.remove("flip");
         this.#dealerValue.textContent = dealerValue;
+    }
+
+    #waitForAnimation(element) {
+        return new Promise(resolve => {
+            element.addEventListener("animationend", resolve, { once: true });
+        });
     }
 
     async displayDealerCard(card, dealerValue) {
@@ -96,8 +107,10 @@ export class UI {
     }
 
     async #displayCard(cardDOM, container) {
+        await new Promise(resolve => {
+            setTimeout(resolve, 300); // Delay for testing
+        });
         container.appendChild(cardDOM);
-        setTimeout(() => { }, 500); // Delay for testing
     }
 
     #setCardHidden(cardDOM) {
